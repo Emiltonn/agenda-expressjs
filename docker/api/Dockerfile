@@ -1,0 +1,4 @@
+FROM node:13.8.0
+
+EXPOSE $API_PORT
+WORKDIR /usr/src/api

@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  api:
+    build: ./api
+    command: ["bash","/usr/src/api/start.sh"]
+    ports:
+      - "${API_PORT}:${API_PORT}"
+    expose:
+      - "${API_PORT}"
+    container_name: ${API_HOST}
+    depends_on:
+      - psql
+    volumes:
+      - ../api:/usr/src/api
+    env_file:
+      - ./.env
+
+  psql:
+    build: ./psql
+    container_name: ${PSQL_HOST}
+    expose:
+      - "5432"
+    volumes:
+      - ../db/psql/data:/var/lib/postgresql/data
